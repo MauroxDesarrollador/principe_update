@@ -1,0 +1,232 @@
+[
+  {
+    "title": "Dashboard",
+    "name": "Dashboard",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "dashboard.home"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-home-3-line"
+  },
+  {
+    "title": "Dashboard Taller",
+    "name": "Dashboard Taller",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "dashboard.taller"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-home-3-line"
+  },
+  {
+    "title": "Calendario de entregas",
+    "name": "Calendario de entregas",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "calendar.calendar"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-calendar-2-line"
+  },
+  {
+    "title": "Clientes",
+    "name": "Clientes",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "client.list"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-user-line"
+  },
+  {
+    "title": "Inventario",
+    "name": "Inventario",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "product.list"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-terminal-window-line"
+  },
+  {
+    "title": "Órdenes",
+    "name": "Órdenes",
+    "is_heading": false,
+    "is_active": false,
+    "link": "",
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-pages-line",
+    "children":[
+      {
+        "title": "Crear orden",
+        "name": "Crear orden",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "orders.add"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-add-line"
+      },
+      {
+        "title": "Listado de órdenes",
+        "name": "Listado de órdenes",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "orders.list"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-list-unordered"
+      }
+    ]
+  },
+  {
+    "title": "Reportes",
+    "name": "Reportes",
+    "is_heading": false,
+    "is_active": false,
+    "link": "",
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-bar-chart-grouped-line",
+    "children": [
+      {
+        "title": "Productos más vendidos",
+        "name": "Productos más vendidos",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.bestSellers"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      },
+      {
+        "title": "Movimiento de productos",
+        "name": "Movimiento de productos",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.productsMovements"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      },
+      {
+        "title": "Reporte de ganancias",
+        "name": "Reporte de ganancias",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.orderReport"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      },
+      {
+        "title": "Reporte de Movimientos",
+        "name": "Reporte de Movimientos",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.movementReport"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      },
+      {
+        "title": "Reporte Diario de Ventas",
+        "name": "Reporte Diario de Ventas",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.salesJournalReport"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      },
+      {
+        "title": "Reporte de Cuentas X Cobrar",
+        "name": "Reporte de Cuentas X Cobrar",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.accountsReceivableReport"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      },
+      {
+        "title": "Reporte de inventarios",
+        "name": "Reporte de inventarios",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.inventoryReport"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      }
+    ]
+  },
+  {
+    "title": "Usuarios",
+    "name": "Usuarios",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "user.list"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-account-circle-line"
+  },
+  {
+    "title": "Delivery",
+    "name": "Delivery",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "display": "standalone",
+      "name": "public.delivery"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-send-plane-line"
+  },
+  {
+    "title": "Entregas local",
+    "name": "Entregas local",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "display": "standalone",
+      "name": "public.local"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-send-plane-line"
+  }
+]

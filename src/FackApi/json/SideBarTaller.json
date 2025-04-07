@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Dashboard",
+    "name": "Dashboard",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "dashboard.taller"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-home-3-line"
+  },
+  {
+    "title": "Calendario de entregas",
+    "name": "Calendario de entregas",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "calendar.calendar"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-calendar-2-line"
+  }
+]

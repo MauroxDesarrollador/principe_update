@@ -1,0 +1,85 @@
+[
+   {
+    "title": "Dashboard",
+    "name": "Dashboard Taller",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "dashboard.taller"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-home-3-line"
+  },
+  {
+    "title": "Inventario",
+    "name": "Inventario",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "product.list"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-terminal-window-line"
+  },
+  {
+    "title": "Órdenes / Compras",
+    "name": "Órdenes / Compras",
+    "is_active": false,
+    "link": {
+      "name": "orders.list"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-pages-line"
+  },
+   {
+    "title": "Reportes",
+    "name": "Reportes",
+    "is_heading": false,
+    "is_active": false,
+    "link": "",
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-bar-chart-grouped-line",
+    "children": [
+      {
+        "title": "Reporte Diario de Ventas",
+        "name": "Reporte Diario de Ventas",
+        "is_heading": false,
+        "is_active": false,
+        "link": {
+          "name": "reports.salesJournalReport"
+        },
+        "class_name": "",
+        "is_icon_class": true,
+        "icon": "ri-file-line"
+      }
+    ]
+  },
+  {
+    "title": "Clientes",
+    "name": "Clientes",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "client.list"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-user-line"
+  },
+  {
+    "title": "Calendario de entregas",
+    "name": "Calendario de entregas",
+    "is_heading": false,
+    "is_active": false,
+    "link": {
+      "name": "calendar.calendar"
+    },
+    "class_name": "",
+    "is_icon_class": true,
+    "icon": "ri-calendar-2-line"
+  }
+]

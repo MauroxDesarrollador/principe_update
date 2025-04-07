@@ -1,0 +1,73 @@
+// Bootstrap Css
+//@import "~bootstrap/scss/bootstrap";
+//@import "~bootstrap/scss/bootstrap-grid";
+
+@import "../css/bootstrap";
+
+// Animate css
+@import "~animate.css/animate.min.css";
+
+@import '~node-snackbar/src/sass/snackbar.sass';
+
+@mixin light-body {
+  font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: var(--iq-secondary); background: var(--iq-bg-light-color);
+}
+@mixin dark-body {
+  font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: #8c91b6; background: var(--iq-bg-dark-color);
+}
+@mixin rtl-light-body {
+  font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: var(--iq-secondary); background: var(--iq-bg-light-color);
+}
+@mixin rtl-dark-body {
+  font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: #8c91b6; background: var(--iq-bg-dark-color);
+}
+
+[dir="ltr"] {
+
+  .dark{
+    @import "../css/dark/typography";
+    @import "../css/dark/style";
+    @include dark-body;
+    .table{
+      color: #fff !important;
+    }
+  }
+  @import "../css/light/typography";
+  @import "../css/light/style";
+  .light{
+    @include light-body;
+  }
+  @import "../css/light/responsive";
+  @import "../css/dark/responsive";
+}
+
+.iq-global-search>ul>li a, .slick-arrow, .breadcrumb-item>a{
+  color: var(--iq-primary);
+  &:hover{
+    color: var(--iq-primary);
+  }
+}
+
+[dir="rtl"]{
+  .dark{
+    @import "../css/rtl/dark/typography";
+    @import "../css/rtl/dark/style";
+    @include rtl-dark-body;
+    .table{
+      color: #fff !important;
+    }
+  }
+  @import "../css/rtl/light/style";
+  @import "../css/rtl/light/typography";
+  body {
+    @include rtl-light-body;
+  }
+  @import "../css/rtl/light/responsive";
+  @import "../css/rtl/dark/responsive";
+}
+
+
+// Font awesome icon Css
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+@import "./main.scss"

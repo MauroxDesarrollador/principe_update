@@ -1,0 +1,25 @@
+export default {
+  // webBaseURL: 'http://api.pa.dev.cronapis.com/api',
+  // webBaseURL: 'http://127.0.0.1:8000/api',
+   webBaseURL: 'https://api.principeazul.phoenixtechsa.com/api',
+//webBaseURL: 'https://api.principe2.phoenixtechsa.com/api',
+firebaseConfig: {
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: ''
+  },
+  auth0Config: {
+    domain: '',
+    clientID: '',
+    // make sure this line is contains the port: 8080
+    redirectUri: '',
+    // we will use the api/v2/ to access the user information as payload
+    audience: '',
+    responseType: 'token id_token',
+    scope: 'openid profile'
+  }
+}

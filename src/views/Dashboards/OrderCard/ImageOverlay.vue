@@ -8,18 +8,14 @@
         <section class="cardImageText">
           <div class="text">
             <h1>{{ title }}</h1>
-            <p><b>Descripción:</b> {{ description }}</p>
-            <p><b>Motivo:</b> {{ motivo }}</p>
+            
+            <p class="aumentarsize" style="color:black !important"><b>Motivo:</b> {{ motivo }}</p>
            
             <p class="aumentarsize">
-              <b>Nota taller:</b>
-              <span>{{notaTaller}}</span>
+              <b style="color:black !important">Nota taller:</b>
+              {{notaTaller}}
             </p>
            
-            <p class="aumentarsize">
-              <b>Texto Personalizado:</b>
-              <span>{{limpiarHtml(textoPersonalizado)}}</span>
-            </p>
             
             <button @click="verOverlay">Cerrar</button>
           </div>
@@ -62,8 +58,11 @@
 .image-overlay .overlay .text p {
   font-size: 1.4em;
 }
-.aumentarsize * {
+.aumentarsize{
   font-size: 1.4em;
+      color: #EC0609;
+    font-weight: bold;
+    font-family: arial;
 }
 .image-overlay .overlay .text span {
   font-size: 1.2em;
@@ -80,9 +79,11 @@
   background-color: #0056b3;
 }
 .image-overlay .overlay .fullImageCard {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 .image-overlay .overlay .cardImageText {
   display: flex;
@@ -206,6 +207,9 @@ export default {
             event.target.src = "https://placehold.co/600x400";// Replace with a default image path
         },
         limpiarHtml(texto){
+            if(texto === null || texto === undefined){
+                return 'No disponible';
+            }
             // Eliminar etiquetas HTML
             const textoSinHtml = texto.replace(/<[^>]*>/g, '');
             // Reemplazar caracteres especiales

@@ -26,3 +26,4 @@ src/config/constant.js
 *.sw?
 *.zip
 *.sql
+/dist_prod_backup

@@ -115,14 +115,7 @@
 .image-overlay .overlay .cardImageText .fullImageCard {
   margin: 20px;
 }
-.image-overlay .overlay .cardImageText .fullImageCard:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s;
-}
-.image-overlay .overlay .cardImageText .fullImageCard:active {
-  transform: scale(1);
-  transition: transform 0.3s;
-}
+
 .image-overlay .overlay .cardImageText .fullImageCard:focus {
   outline: none;
 }

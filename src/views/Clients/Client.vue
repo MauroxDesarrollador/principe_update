@@ -73,9 +73,11 @@
         </b-row>
       </form>
     </ValidationObserver>
+   
   </b-container>
 </template>
 <script>
+
 import { vito } from '../../config/pluginInit'
 import clientService from '@/services/client'
 import { mask } from 'vue-the-mask'

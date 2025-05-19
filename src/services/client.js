@@ -6,6 +6,10 @@ export default {
     const res = await axios.get('/clients?' + params, config)
     return res.data
   },
+  async getReportByDayToMonth (params) {
+    const res = await axios.get('/clients/reportes-diarios-por-mes' + params)
+    return res.data
+  },
   async getById (id) {
     const res = await axios.get(`/clients/${id}`)
     return res.data

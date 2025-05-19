@@ -12,22 +12,42 @@
               ></b-spinner>
             </b-col>
             <b-row v-else align-h="between">
-              <b-col md="3">Fecha inicial
+              <b-col md="4">Fecha inicial
                 <b-form-input
                   v-model="initDate"
                   type="date"
                 ></b-form-input>
               </b-col>
-              <b-col md="3">Fecha final
+              <b-col md="4">Fecha final
                 <b-form-input v-model="endDate" type="date"></b-form-input>
               </b-col>
-              <b-col md="6" class="my-1 text-center">
+              <b-col md="4">
+                Categoria
+                <b-form-select v-model="category" :options="[{
+                  value: '',
+                  text: 'Todos'
+                }, {
+                  value: 1,
+                  text: 'Flores'
+                }, {
+                  value: 2,
+                  text: 'Globos'
+                },{
+                  value: 3,
+                  text: 'Escarcha'
+                },{
+                  value: 4,
+                  text: 'Otros'
+                }]"></b-form-select>
+
+              </b-col>
+              <b-col md="12" class="my-1" style="text-align: right">
                 <b-row align-h="end" class="mb-2 mt-2">
                   <div class="col-md-6 text-right">
                     <b-button
                       style="margin-right: 5px"
-                      class="btn btn-outline-primary"
-                      v-b-tooltip.top="'Actualizar'"
+                      variant="primary"
+                      v-b-tooltip.top="'Buscar'"
                       @click="refresh"
                     >
                       <i class="ri-search-line"></i>
@@ -133,7 +153,7 @@
         </iq-card>
       </b-col>
     </b-row>
-    <iq-card id="pie-chart-category-export">
+    <iq-card id="pie-chart-category-export" style="padding: 20px">
       <b-row>
         <b-col md="12" style="text-align:left">
             <b-button
@@ -148,12 +168,12 @@
         <b-col md="12">
           <h5 class="text-center my-3">Gráficos del reporte</h5>
           <p class="text-muted text-center">
-            Estos gráficos muestran la distribución de las cantidades por categoría y tipo.
+            Reporte de productos más vendidos
           </p>
         </b-col>
         <b-col md="12">
           <div style="width: 100%; height: 400px;">
-            <Bar
+            <Pie
               :chart-options="chartOptions"
               :chart-data="chartDataByCategory"
               :chart-id="'pie-chart-category'"
@@ -202,10 +222,12 @@ export default {
         type: '',
         products: [],
         initDate: '',
-        endDate: ''
+        endDate: '',
+        category: ''
       },
       initDate:"",
       endDate:"",
+      category: '',
       options: {
         type: [
           { value: '', text: 'Todos' },
@@ -252,8 +274,19 @@ export default {
         ]
       },
       chartOptions: {
+        plugins: {
+           
+          },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            beginAtZero: true,
+          },
+          y: {
+            beginAtZero: true,
+          },
+        },
       },
       plugins: {
       tooltip: {
@@ -285,6 +318,9 @@ export default {
     refresh () {
        let params = '';
        params=`?initDate=${this.initDate}&endDate=${this.endDate}`
+       if(this.category !== '') {
+          params += `&category=${this.category}`
+        }
       this.loading = true
       reportsService.getBestSellers(params)
           .then(response => {

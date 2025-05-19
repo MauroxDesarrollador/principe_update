@@ -106,9 +106,9 @@
                 </b-col>
                 <b-col md="12">
                   <b-form-group>
-                    <b-button variant="primary" @click="createOrder"
-                      >Crear orden</b-button
-                    >
+                    <b-button variant="primary" @click="createOrder">Crear orden</b-button>
+                    <b-button variant="success" style="margin-left:10px" @click="getExcel">Excel</b-button>
+                    
                   </b-form-group>
                 </b-col>
                 <template v-if="orders.length === 0">
@@ -136,6 +136,11 @@
                       :current-page="currentPage"
                       @filtered="onFiltered"
                     >
+                  
+                      <template v-slot:cell(id)="orders">
+                      {{ orders.item.id }}
+                      <div v-html="BadgeProducts(orders.item.id)"></div>
+                      </template>
                       <template v-slot:cell(products)="orders">
                         <div
                           v-for="item in orders.item.products"
@@ -354,6 +359,8 @@ import { vito } from '../../config/pluginInit'
 import orderService from '@/services/order'
 import OrderDetailComponent from '@/components/Order/OrderDetailComponent'
 import moment from 'moment'
+import reportsService from '@/services/reports'
+
 
 export default {
   name: 'OrderList',
@@ -447,6 +454,56 @@ export default {
     }
   },
   methods: {
+    BadgeProducts(id){
+      let ordenData=this.orders.find(p=>p.id==id);
+      let productosArray=ordenData.products;
+      let htmlValidate="";
+      let personalizate = false;
+      let noteValidate=false;
+      let noteDesignValidate=false;
+      for(let i=0;i<productosArray.length;i++){
+          if(productosArray[i].personalized_text!=null){
+            personalizate=true;
+          }
+          if(productosArray[i].note_design!=null){
+            personalizate=true;
+          }
+          if(productosArray[i].note!=null){
+            personalizate=true;
+          }
+      }
+      if(personalizate==true){
+        htmlValidate+="<span class='badge badge-primary'>Personalizado</span>";
+      }
+      if(noteValidate==true){
+        htmlValidate+="<span class='badge badge-primary'>Nota de taller</span>";
+      }
+       if(noteDesignValidate==true){
+        htmlValidate+="<span class='badge badge-primary'>Nota de diseño</span>";
+      }
+      return htmlValidate;
+    },
+    getExcel(){
+      let params = ''
+      if (this.selectedPersonalize !== 2) {
+        if (this.selectedType === 1) {
+          // Fecha de creación
+          params = `delivery_init_date=${this.initDate}&delivery_end_date=${this.endDate}&required_personalized=${this.selectedPersonalize}&orderBy=created_at&orderDirection=desc&status=${this.statusFilter}`
+        } else {
+          // Fecha de entrega
+          params = `init_date=${this.initDate}&end_date=${this.endDate}&required_personalized=${this.selectedPersonalize}&orderBy=created_at&orderDirection=desc&status=${this.statusFilter}`
+        }
+      } else {
+        if (this.selectedType === 1) {
+          // Fecha de creación
+          params = `delivery_init_date=${this.initDate}&delivery_end_date=${this.endDate}&orderBy=created_at&orderDirection=desc&status=${this.statusFilter}`
+        } else {
+          // Fecha de entrega
+          params = `init_date=${this.initDate}&end_date=${this.endDate}&orderBy=created_at&orderDirection=desc&status=${this.statusFilter}`
+        }
+      }
+      reportsService.getMovementReportExcel(params)
+    },
     showLink (item) {
       const route = this.$router.resolve({ path: `/form/public/${item.id}` })
       window.open(route.href, '_blank')

@@ -3,9 +3,10 @@
         <img :src="imageSrc" alt="Image Overlay" @click="verOverlay" v-if="imageSrc" @error="handleImageError"/>
       <div v-if="overlayVisible" class="overlay">
         <section class="cardImageText">
+            <button @click="verOverlay" style="background-color:#efeefd; color: black; border: none; padding: 10px 20px; font-size: 1em; cursor: pointer;border-radius:20px;position:absolute;top:20px;right:20px">Cerrar</button>
           <img :src="imageSrc" class="fullImageCard" @error="handleImageError" />
         </section>
-        <section class="cardImageText">
+        <section class="cardImageText" v-show="notaTaller!= null && notaTaller != undefined">
           <div class="text">
             <h1>{{ title }}</h1>
             
@@ -16,8 +17,7 @@
               {{notaTaller}}
             </p>
            
-            
-            <button @click="verOverlay">Cerrar</button>
+               <button @click="verOverlay" style="background-color:#efeefd; color: black; border: none; padding: 10px 20px; font-size: 1em; cursor: pointer;border-radius:20px;position:absolute;top:20px;right:20px">Cerrar</button>
           </div>
         </section>
       </div>

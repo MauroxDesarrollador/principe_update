@@ -26,14 +26,18 @@
                     <b-form-input v-model="endDate" type="date"></b-form-input>
                   </b-col>
                   <b-col md="4">
-                    Status
-                    <b-form-select v-model="status" :options="['Todos','Creado', 'Confeccionado', 'Entregado']"></b-form-select>
+                     Tipo de fecha a filtrar
+                    <b-form-select v-model="date_type" :options="['Fecha de entrega','Fecha de creación']"></b-form-select>
                   </b-col>
                   <b-col md="4">
                     Tipo de orden
                     <b-form-select v-model="tipofilter" :options="['Todos','WhatsApp', 'Tienda', 'Página Web', 'Instagram', 'Pedidos Ya']"></b-form-select>
                   </b-col>
-                  <b-col md="2" align-self="end">
+                  <b-col md="4">
+                    Motivo
+                    <b-form-select v-model="motivo" :options="['Todos','Cumpleaños','Aniversario','Amor','Graduación','Get Well Soon','Condolencias','Agradecimiento','Corporativo','Nacimiento','Boda','Día de las madres','San Valentín','Sin Ocasión']"></b-form-select> 
+                  </b-col>
+                  <b-col md="4" align-self="end">
                     <b-button
                       variant="primary"
                       v-b-tooltip.top="'Buscar'"
@@ -73,7 +77,27 @@
               </template>
               <template v-else>
                 <b-col md="12">
+                 
+
                   <b-container class="my-3">
+                    <h5 style="text-align: center;font-weight: bold;color: rgb(11, 11, 11);margin-bottom: 20px;">
+                      Total de pedidos por modo de entrega
+                    </h5>
+                    <b-row v-for="(mode, j) in results.countByMode" :key="j">
+                      <b-col
+                        sm="6"
+                        align="center"
+                        style="font-weight: bold; color: #0b0b0b;font-transform:uppercase !important"
+                        >{{ mode.mode.toUpperCase() }}</b-col
+                      >
+                      <b-col sm="6"> {{ mode.quantity }} </b-col>
+                    </b-row>
+                  </b-container>
+
+                  <b-container class="my-3">
+                    <h5 style="text-align: center;font-weight: bold;color: rgb(11, 11, 11);margin-bottom: 20px;">
+                      Total de productos por personalización	
+                    </h5>
                     <b-row
                       v-for="(pers, i) in results.countPersonalizedByProduct"
                       :key="i"
@@ -82,24 +106,13 @@
                         sm="6"
                         align="center"
                         style="font-weight: bold; color: #0b0b0b"
-                        ><span v-if="pers.personalized">PERSONALIZADOS</span
-                        ><span v-else>STANDARD</span></b-col
+                        ><span v-if="pers.personalized">PRODUCTOS PERSONALIZADOS</span
+                        ><span v-else>PRODUCTOS STANDARD</span></b-col
                       >
                       <b-col sm="6"> {{ pers.quantity }} </b-col>
                     </b-row>
                   </b-container>
 
-                  <b-container class="my-3">
-                    <b-row v-for="(mode, j) in results.countByMode" :key="j">
-                      <b-col
-                        sm="6"
-                        align="center"
-                        style="font-weight: bold; color: #0b0b0b"
-                        >{{ mode.mode }}</b-col
-                      >
-                      <b-col sm="6"> {{ mode.quantity }} </b-col>
-                    </b-row>
-                  </b-container>
                   <b-container class="my-3">
                     <pre></pre>
                     <b-row
@@ -115,7 +128,7 @@
                       <b-col sm="4"> Venta</b-col>
                     </b-row>
                     <b-row style="font-weight: bold; color: #0b0b0b">
-                      <b-col sm="4" align="center">Total Pedidos</b-col>
+                      <b-col sm="4" align="center">Total productos vendidos</b-col>
                       <b-col sm="4">{{ category.qty }}</b-col>
                       <b-col sm="4">
                         {{ parseFloat(category.val).toFixed(2) }}</b-col
@@ -202,7 +215,7 @@
           </p>  
          </b-col>
         <b-col md="6" class="p-3">
-          <h4 class="text-center">Total de pedidos</h4>
+          <h4 class="text-center">Total de productos por categoria</h4>
           <div style="width: 100%; height: 400px;">
             <Pie
               :chart-options="chartOptions"
@@ -274,7 +287,9 @@ export default {
   },
   data () {
     return {
+      motivo:"Todos",
       status: "Todos", // Default status
+      date_type: "Fecha de creación", // Default date type
       tipofilter: "Todos", // Default type of order
       startDate: '',
       endDate: '',
@@ -387,7 +402,7 @@ export default {
     getData () {
       // eslint-disable-next-line no-unused-vars
       let params = ''
-      params = `start_date=${this.startDate}&end_date=${this.endDate}&status=${this.status}&type=${this.tipofilter}`
+      params = `start_date=${this.startDate}&end_date=${this.endDate}&status=${this.status}&type=${this.tipofilter}&date_type=${this.date_type}&motivo=${this.motivo}`
 
       reportsService.getMovementReport(params)
         .then(response => {

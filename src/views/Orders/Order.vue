@@ -94,16 +94,7 @@
                         placeholder="Selecciona fecha"
                       ></b-form-datepicker>
                     </b-col>
-                    <b-col>
-                      <input
-                        type="time"
-                        v-model="order.delivery_time"
-                        :class="{'is-invalid': errors.length > 0}"
-                        class="form-control"
-                        placeholder="Hora de entrega"
-                        style='height:60px !important'
-                      >
-                    </b-col>
+                    
                      </b-row>
                           <div class="invalid-feedback">
                             <span>{{ errors[0] }}</span>

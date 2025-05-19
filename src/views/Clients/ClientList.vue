@@ -129,6 +129,66 @@
         </iq-card>
       </b-col>
     </b-row>
+     <b-row>
+      <b-col lg="12">
+        <iq-card>
+          <template v-slot:body>
+            <div class="new-user-info">
+              <b-row>
+                <b-form-group class="col-md-12" label="Fecha:" label-for="fecha">
+                  <b-form-input
+                    v-model="filterReport.fecha"
+                    type="date"
+                    name="fecha"
+                    id="fecha"
+                    @change="getClientByDayToMonth()"
+                    placeholder="Fecha">
+                  </b-form-input>
+                </b-form-group>
+              
+              </b-row>
+              <hr />
+
+                <section v-if="clientByDayToMonth.data && clientByDayToMonth.data.length > 0">
+                  <b-row>
+                    <b-col lg="12">
+                      <h4>Clientes por día del mes</h4>
+                      <h5>Total: {{ clientByDayToMonth.total }}</h5>
+                      <p style="text-align: center;">
+                        <b>Nota:</b> 
+                        Clientes nuevos por mes son los clientes nuevos menos los clientes nuevos del día.
+                        <br>
+                        Total general de clientes son los clientes viejos menos los clientes nuevos del mes.
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Dia</th>
+                              <th scope="col">Total clientes nuevos del dia</th>
+                              <th scope="col">Total clientes nuevos del mes ( {{parseFloat(clientByDayToMonth.total_mes) }} )</th>
+                              <th scope="col">Total General de clientes ({{parseFloat(clientByDayToMonth.total)}} )</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="(item, index) in clientByDayToMonth.data" :key="index">
+                              <td>{{ item.day }}</td>
+                              <td>{{ item.total_dia }}</td>
+                              <td>{{ parseFloat(clientByDayToMonth.total_mes) - parseFloat(item.total_dia) }}</td>
+                              <td>{{ parseFloat(clientByDayToMonth.total) - parseFloat(clientByDayToMonth.total_mes) - parseFloat(item.total_dia)  }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </section>
+
+            </div>
+          </template>
+        </iq-card>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 <script>
@@ -138,8 +198,10 @@ import clientService from '@/services/client'
 export default {
   name: 'ClientList',
   created () { },
-  mounted () {
+  mounted() {
     vito.index()
+    this.filterReport.fecha = new Date().toISOString().slice(0, 10);
+     this.getClientByDayToMonth();
   },
   data () {
     return {
@@ -160,10 +222,32 @@ export default {
         { label: 'Fecha creación', key: 'created_at', class: 'text-center', sortable: true },
         { label: 'Acción', key: 'action', class: 'text-center' }
       ],
-      clients: []
+      clients: [],
+      clientByDayToMonth: {
+        status: false,
+        data: [], // Inicializar como un array vacío
+        total: 0,
+        total_mes: 0,
+      },
+      filterReport:{
+        fecha: '',
+      }
     }
   },
   methods: {
+    async getClientByDayToMonth () {
+      this.clientByDayToMonth = { data: [], total: 0, total_mes: 0, status: false };
+      try {
+        const response = await clientService.getReportByDayToMonth("?fecha=" + this.filterReport.fecha);
+        this.clientByDayToMonth.data = response.data || [];
+        this.clientByDayToMonth.total = response.total_general || 0;
+        this.clientByDayToMonth.total_mes = response.total_mes || 0;
+        this.clientByDayToMonth.status = response.status || false;
+      } catch (error) {
+        console.error(error);
+        this.clientByDayToMonth.data = []; // Asegurar que sea un array
+      }
+    },
     async loadData () {
       this.loading = true
       let config = {

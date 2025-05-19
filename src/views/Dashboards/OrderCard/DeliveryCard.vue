@@ -84,7 +84,7 @@
             <b-row class="mt-3">
               <b-col md="12">
                 <p>
-                  Día de entrega: {{ order.delivery_date | formatWeekDate }}
+                  Día de entrega: {{ order.delivery_date | formatSinHHDate }}
                 </p>
                 <div v-for="product in order.products" :key="product.id">
                   <p>Producto: {{ product.name }}</p>
